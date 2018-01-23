@@ -112,6 +112,9 @@ abstract class GatewayAbstract implements GatewayInterface {
 			case 'itco':
 				$gateway = new ItcoGateway();
 				break;
+			case 'postgah':
+				$gateway = new PostgahGateway();
+				break;
 			default:
 				$gateway = new AzinwebGateway();
 				break;
