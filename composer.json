@@ -1,0 +1,24 @@
+{
+    "name": "mavinoo/laravel-sms-iran",
+    "description": "package for send sms with laravel (All gatways in Iran)",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ali pamenari",
+            "email": "info@azinweb.com"
+        },
+        {
+            "name": "Mohammad Ghanbari",
+            "email": "info@mavin.ir"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mavinoo\\LaravelSmsIran\\": "src/"
+        }
+    }
+}
