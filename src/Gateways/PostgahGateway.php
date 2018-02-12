@@ -69,13 +69,30 @@ class PostgahGateway extends GatewayAbstract {
 	
 	private function curlURL($webService, $params)
     {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $webService);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
-        $response = curl_exec($ch);
+        try
+        {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $webService);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
+            $response = curl_exec($ch);
 
-        return $response;
+            if($typeRec)
+            {
+                if(preg_match("/^[0-9]{20}$/s", $response))
+                    return $response;
+            }
+            else
+            {
+                return $response;
+            }
+
+            return false;
+        }
+        catch (Exception $exception)
+        {
+            return false;
+        }
     }
 
 }
