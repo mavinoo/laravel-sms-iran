@@ -1,6 +1,8 @@
 <?php
 namespace Mavinoo\LaravelSmsIran\Gateways;
 
+use Illuminate\Support\Facades\Log;
+
 class PostgahGateway extends GatewayAbstract {
 
 	/**
@@ -29,16 +31,16 @@ class PostgahGateway extends GatewayAbstract {
         $webService = $this->webService . 'SendSms.ashx';
 
         $params = [
-					'username' => $this->username,
-					'password' => $this->password,
-					'from'     => $this->from,
-					'to'       => implode(',', $numbers),
-					'text'     => $text,
-					'flash'    => $isflash,
-					'udh'      => '',
-				];
+			'username' => $this->username,
+			'password' => $this->password,
+			'from'     => $this->from,
+			'to'       => implode(',', $numbers),
+			'text'     => $text,
+			'flash'    => $isflash,
+			'udh'      => '',
+		];
 
-        $response = $this->curlURL($webService, $params);
+        $response = $this->curlURL($webService, $params, true);
 
         return $response;
     }
@@ -52,12 +54,12 @@ class PostgahGateway extends GatewayAbstract {
 			return 'Blank Username && Password';
 		try {
 
-            $webService = $this->webService . 'GetCredit.ashx';
+            		$webService = $this->webService . 'GetCredit.ashx';
 
 			$params = [
-                "username" => $this->username,
-                "password" => $this->password,
-            ];
+				"username" => $this->username,
+				"password" => $this->password,
+			    ];
 
 			return $this->curlURL($webService, $params);
 
@@ -67,7 +69,7 @@ class PostgahGateway extends GatewayAbstract {
 	}
 
 	
-	private function curlURL($webService, $params)
+	private function curlURL($webService, $params, $typeRec = false)
     {
         try
         {
